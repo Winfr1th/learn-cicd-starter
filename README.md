@@ -1,4 +1,4 @@
-![https://github.com/Winfr1th/learn-cicd-starter/actions/workflows/ci.yml/badge.svg]
+![Code Coverage](https://github.com/Winfr1th/learn-cicd-starter/actions/workflows/ci.yml/badge.svg)
 
 # learn-cicd-starter (Notely)
 
