@@ -19,4 +19,4 @@ jobs:
           go-version: "1.25.1"
 
       - name: Run Unit Tests
-        run: internal/auth/auth_test.go
+        run: go test ./...
