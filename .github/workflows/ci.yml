@@ -26,7 +26,7 @@ jobs:
 
         - name: Run gosec
           run: gosec ./...
-          
+
     styles:
       name: Style
       runs-on: ubuntu-latest
@@ -40,7 +40,10 @@ jobs:
         with:
           go-version: "1.25.1"
 
-      - name: Fix styling
+      - name: Fix Styling
+        run: go fmt ./...
+
+      - name: styling check
         run: test -z $(go fmt ./...)
 
       - name: Install staticcheck
