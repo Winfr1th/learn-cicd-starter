@@ -5,11 +5,33 @@ on:
     branches: [main]
 
 jobs:
-  tests:
-    name: Tests
-    runs-on: ubuntu-latest
+    tests:
+      name: Tests
+      runs-on: ubuntu-latest
 
-    steps:
+      steps:
+        - name: Check out code
+          uses: actions/checkout@v4
+
+        - name: Set up Go
+          uses: actions/setup-go@v5
+          with:
+            go-version: "1.25.1"
+
+        - name: Run Unit Tests
+          run: go test -cover ./...
+
+        - name: Install gosec
+          run: go install github.com/securego/gosec/v2/cmd/gosec@latest
+
+        - name: Run gosec
+          run: gosec ./...
+
+    styles:
+      name: Style
+      runs-on: ubuntu-latest
+    
+      steps:
       - name: Check out code
         uses: actions/checkout@v4
 
@@ -18,5 +40,13 @@ jobs:
         with:
           go-version: "1.25.1"
 
-      - name: Run Unit Tests
-        run: go test -cover ./...
+      - name: Fix Styling
+        run: go fmt ./...
+
+      - name: styling check
+        run: test -z $(go fmt ./...)
+
+      - name: Install staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
+
+      
